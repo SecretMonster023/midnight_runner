@@ -1,42 +1,51 @@
-name: Weekly Programmatic Content Generation
+name: Trade Business Lab Draft Generator
 
 on:
-  schedule:
-    - cron: '0 0 * * 0' # Runs automatically every Sunday at midnight UTC
-  workflow_dispatch: # Enables a manual "Run" button in GitHub for testing
+  workflow_dispatch:
+    inputs:
+      max_articles:
+        description: "Maximum number of new drafts to generate"
+        required: false
+        default: "1"
+  # Keep scheduled generation off during Phase 1.
+  # We will enable it only after the first drafts pass human review.
 
 permissions:
   contents: write
 
 jobs:
-  generate-and-deploy:
+  generate-draft:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.11"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-genai requests
+          pip install openai
 
-      - name: Run Content Generator
+      - name: Generate draft
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          AMAZON_TRACKING_ID: ${{ secrets.AMAZON_TRACKING_ID }}
-        run: |
-          python generator.py
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5-mini
+          MAX_ARTICLES: ${{ inputs.max_articles || '1' }}
+        run: python generator.py
 
-      - name: Commit and Push New Pages
+      - name: Commit generated draft
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
-          git diff-index --quiet HEAD || git commit -m "auto: generate weekly programmatic content"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/
+          if git diff --cached --quiet; then
+            echo "No new draft to commit."
+            exit 0
+          fi
+          git commit -m "draft: generate Trade Business Lab article"
           git push
