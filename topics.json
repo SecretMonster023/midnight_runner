@@ -1,0 +1,102 @@
+[
+  {
+    "id": "jobber-vs-housecall-pro",
+    "title": "Jobber vs Housecall Pro: Which Is Better for a Small Contractor?",
+    "slug": "jobber-vs-housecall-pro-small-contractors",
+    "intent": "commercial_comparison",
+    "audience": "small home-service contractors",
+    "products": ["Jobber", "Housecall Pro"],
+    "priority": 1,
+    "internal_links": ["best-field-service-software-1-5-person-business", "jobber-review", "housecall-pro-review"]
+  },
+  {
+    "id": "best-hvac-software",
+    "title": "Best HVAC Software for Small Businesses (1–10 Techs)",
+    "slug": "best-hvac-software-small-business",
+    "intent": "commercial_best",
+    "audience": "HVAC businesses with 1–10 technicians",
+    "products": ["Jobber", "Housecall Pro", "ServiceTitan"],
+    "priority": 2,
+    "internal_links": ["jobber-vs-housecall-pro", "housecall-pro-vs-servicetitan"]
+  },
+  {
+    "id": "best-plumbing-software",
+    "title": "Best Plumbing Software for Small Businesses",
+    "slug": "best-plumbing-software-small-business",
+    "intent": "commercial_best",
+    "audience": "small plumbing businesses",
+    "products": ["Jobber", "Housecall Pro", "ServiceTitan"],
+    "priority": 3,
+    "internal_links": ["jobber-vs-housecall-pro", "jobber-vs-servicetitan"]
+  },
+  {
+    "id": "best-electrical-software",
+    "title": "Best Electrical Contractor Software for Small Businesses",
+    "slug": "best-electrical-contractor-software-small-business",
+    "intent": "commercial_best",
+    "audience": "small electrical contractors",
+    "products": ["Jobber", "Housecall Pro", "ServiceTitan"],
+    "priority": 4,
+    "internal_links": ["jobber-vs-housecall-pro", "best-field-service-software-1-5-person-business"]
+  },
+  {
+    "id": "housecall-pro-review",
+    "title": "Housecall Pro Review: Is It Worth It for a Small Contractor?",
+    "slug": "housecall-pro-review-small-contractors",
+    "intent": "commercial_review",
+    "audience": "small home-service contractors",
+    "products": ["Housecall Pro"],
+    "priority": 5,
+    "internal_links": ["jobber-vs-housecall-pro", "housecall-pro-vs-servicetitan"]
+  },
+  {
+    "id": "jobber-review",
+    "title": "Jobber Review: Is It Worth It for a Small Contractor?",
+    "slug": "jobber-review-small-contractors",
+    "intent": "commercial_review",
+    "audience": "small home-service contractors",
+    "products": ["Jobber"],
+    "priority": 6,
+    "internal_links": ["jobber-vs-housecall-pro", "jobber-vs-servicetitan"]
+  },
+  {
+    "id": "housecall-pro-vs-servicetitan",
+    "title": "Housecall Pro vs ServiceTitan: Which Size Contractor Needs Which?",
+    "slug": "housecall-pro-vs-servicetitan",
+    "intent": "commercial_comparison",
+    "audience": "home-service contractors comparing software by company size",
+    "products": ["Housecall Pro", "ServiceTitan"],
+    "priority": 7,
+    "internal_links": ["housecall-pro-review", "best-hvac-software"]
+  },
+  {
+    "id": "jobber-vs-servicetitan",
+    "title": "Jobber vs ServiceTitan: Which Is Better for a Small Business?",
+    "slug": "jobber-vs-servicetitan-small-business",
+    "intent": "commercial_comparison",
+    "audience": "small home-service businesses",
+    "products": ["Jobber", "ServiceTitan"],
+    "priority": 8,
+    "internal_links": ["jobber-review", "best-plumbing-software"]
+  },
+  {
+    "id": "best-field-service-software-1-5-person-business",
+    "title": "Best Field Service Software for a 1–5 Person Contractor Business",
+    "slug": "best-field-service-software-1-5-person-contractor",
+    "intent": "commercial_best",
+    "audience": "contractor businesses with 1–5 people",
+    "products": ["Jobber", "Housecall Pro", "ServiceTitan"],
+    "priority": 9,
+    "internal_links": ["jobber-vs-housecall-pro", "best-field-service-software-solo-contractor"]
+  },
+  {
+    "id": "best-field-service-software-solo-contractor",
+    "title": "Best Field Service Software for a Solo Contractor",
+    "slug": "best-field-service-software-solo-contractor",
+    "intent": "commercial_best",
+    "audience": "solo contractors",
+    "products": ["Jobber", "Housecall Pro"],
+    "priority": 10,
+    "internal_links": ["jobber-vs-housecall-pro", "best-field-service-software-1-5-person-business"]
+  }
+]
