@@ -1,0 +1,15 @@
+{
+  "Jobber": [
+    {"label":"Official pricing and plan features","url":"https://www.getjobber.com/pricing/"},
+    {"label":"Official Core plan documentation","url":"https://help.getjobber.com/en/articles/the-core-plan/"},
+    {"label":"Official Connect plan documentation","url":"https://help.getjobber.com/en/articles/the-connect-plan/"}
+  ],
+  "Housecall Pro": [
+    {"label":"Official pricing and plan features","url":"https://www.housecallpro.com/pricing/"},
+    {"label":"Official field service management overview","url":"https://www.housecallpro.com/field-service-management-software/"},
+    {"label":"Official Price Book documentation","url":"https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro"}
+  ],
+  "ServiceTitan": [
+    {"label":"Official pricing page","url":"https://www.servicetitan.com/pricing"}
+  ]
+}
