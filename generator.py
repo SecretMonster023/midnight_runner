@@ -1,70 +1,98 @@
+import json
 import os
-import re
-from google import genai
+from pathlib import Path
+from openai import OpenAI
 
-# Fetch API Key and Tracking ID from GitHub Repository Secrets
-API_KEY = os.environ.get("GEMINI_API_KEY")
-AMAZON_ID = os.environ.get("AMAZON_TRACKING_ID", "default-20")
+ROOT = Path(__file__).parent
+TOPICS_FILE = ROOT / "topics.json"
+OUTPUT_DIR = ROOT / "content"
+
+API_KEY = os.environ.get("OPENAI_API_KEY")
+MODEL = os.environ.get("OPENAI_MODEL", "gpt-5-mini")
+MAX_ARTICLES = int(os.environ.get("MAX_ARTICLES", "1"))
 
 if not API_KEY:
-    raise ValueError("GEMINI_API_KEY environment variable is missing.")
+    raise ValueError("OPENAI_API_KEY environment variable is missing.")
 
-# Initialize the Gemini API client
-client = genai.Client(api_key=API_KEY)
+client = OpenAI(api_key=API_KEY)
 
-# Define target programmatic topics/keywords
-topics = [
-    "Best Data Scraping Tools for E-commerce Price Monitoring",
-    "Top Enterprise Cloud Hosting Solutions for WooCommerce",
-    "Commercial General Liability Insurance Requirements for Small Contractors"
-]
+SYSTEM_PROMPT = """You are the editorial engine for Trade Business Lab, an independent resource for home-service contractors and trade business owners.
 
-def sanitize_filename(title):
-    """Converts a title string into a safe filename."""
-    clean = re.sub(r'[^\w\s-]', '', title).strip().lower()
-    return re.sub(r'[-\s]+', '-', clean) + ".md"
+Write practical commercial content for owners choosing business software. Be specific about who each option fits and why.
 
-def generate_content(topic):
-    """Prompts Gemini to generate a structured, SEO-optimized markdown article."""
-    prompt = f"""
-    Write an authoritative, highly structured buyer guide in Markdown format for the topic: "{topic}".
-    
-    Structure Requirements:
-    - Include a clear title (# Header).
-    - Provide a short summary section.
-    - Create a comparison breakdown using bullet points or Markdown tables.
-    - Highlight recommended tools/services.
-    - End with a call to action mentioning checking current pricing on Amazon or official vendor partners using tag: {AMAZON_ID}.
-    - Ensure clear FTC affiliate disclosures at the top.
-    """
-    
-    response = client.models.generate_content(
-        model="gemini-3.8-flash",
-        contents=prompt
+Accuracy rules:
+- Never invent prices, discounts, commission rates, trial periods, customer counts, ratings, integrations, features, statistics, or quotes.
+- The topic data names products to evaluate; it does NOT provide verified current product facts.
+- If a factual claim would require current verification and no verified source material was supplied, do not state it as fact. Mark the point [VERIFY] for editorial research or phrase it as a question the editor should verify.
+- Never claim firsthand testing, interviews, or personal use unless source material explicitly proves it.
+- Do not manufacture citations, URLs, testimonials, or affiliate links.
+- Clearly separate factual claims from editorial analysis.
+- Avoid filler, hype, fake certainty, and generic SEO language.
+
+Editorial requirements:
+- Put an affiliate disclosure near the top.
+- Give a concise recommendation early.
+- Explain best fit by company size, trade, operational complexity, and buying priorities.
+- Include a comparison table when appropriate.
+- Include drawbacks and cases where each product is a poor fit.
+- Include a section called "What to verify before you buy" for facts that can change.
+- End with a useful decision framework, not a hard sell.
+- Use Markdown.
+"""
+
+def load_topics():
+    with TOPICS_FILE.open(encoding="utf-8") as handle:
+        return sorted(json.load(handle), key=lambda item: item["priority"])
+
+def prompt_for(topic):
+    links = ", ".join(topic.get("internal_links", [])) or "none"
+    products = ", ".join(topic["products"])
+    return f"""Create a publication-quality draft using this editorial brief.
+
+Title: {topic['title']}
+Audience: {topic['audience']}
+Search intent: {topic['intent']}
+Products in scope: {products}
+Planned internal-link slugs: {links}
+
+This is a DRAFT for human review. Do not pretend you have live pricing or current vendor data. Use [VERIFY] wherever current factual verification is required.
+
+At the end, add an "EDITOR NOTES" section containing:
+- facts that need verification
+- suggested primary-source pages to research (describe the page; do not invent URLs)
+- affiliate links that still need insertion
+- planned internal links
+"""
+
+def generate_article(topic):
+    response = client.responses.create(
+        model=MODEL,
+        instructions=SYSTEM_PROMPT,
+        input=prompt_for(topic),
     )
-    return response.text
+    return response.output_text.strip()
 
 def main():
-    # Ensure content directory exists
-    output_dir = "content"
-    os.makedirs(output_dir, exist_ok=True)
-    
-    for topic in topics:
-        filename = sanitize_filename(topic)
-        filepath = os.path.join(output_dir, filename)
-        
-        # Skip generation if file already exists to prevent duplicate runs
-        if os.path.exists(filepath):
-            print(f"Skipping (already exists): {filepath}")
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    generated = 0
+
+    for topic in load_topics():
+        if generated >= MAX_ARTICLES:
+            break
+
+        path = OUTPUT_DIR / f"{topic['slug']}.md"
+        if path.exists():
+            print(f"Skipping existing draft: {path.name}")
             continue
-            
-        print(f"Generating content for: {topic}...")
-        markdown_content = generate_content(topic)
-        
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(markdown_content)
-            
-        print(f"Saved: {filepath}")
+
+        print(f"Generating: {topic['title']}")
+        article = generate_article(topic)
+        path.write_text(article + "\n", encoding="utf-8")
+        print(f"Saved draft: {path}")
+        generated += 1
+
+    if generated == 0:
+        print("No new drafts generated.")
 
 if __name__ == "__main__":
     main()
