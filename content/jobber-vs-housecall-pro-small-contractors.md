@@ -1,155 +1,95 @@
-Affiliate disclosure
-I may earn an affiliate commission if you click links to products and make a purchase. This review is editorial and independent. (Insert affiliate links where noted in the EDITOR NOTES.)
+Affiliate disclosure: Trade Business Lab may earn an affiliate fee if you buy through links in this article.
 
-Concise recommendation (editorial)
-- If you run a very small contractor business (solo to ~5 techs) and want a straightforward, fast-to-learn system for scheduling, quoting, and basic invoicing, Jobber is often the easier choice. (Editorial)
-- If you need a more mobile-first, automation- and customer-experience-focused platform with advanced dispatching and marketing add-ons, Housecall Pro is worth evaluating — especially if you plan to scale beyond a handful of techs. (Editorial)
+Bottom line recommendation (quick):  
+- If your priority is the lowest-priced entry-level plan for a solo operator or a very small team and you want basic quoting, online booking, invoicing, and an inexpensive per-user scale-up, Jobber is the clearer low-cost entry point ([Jobber pricing](https://www.getjobber.com/pricing/) — retrieved 2026-10-05).  
+- If you want built-in AI intake, trade-tailored price books, richer dispatch/GPS/route tools, and a “single-vendor” platform that emphasizes automation and scaling tools, Housecall Pro is the stronger all-in-one option despite a higher entry price ([Housecall Pro pricing](https://www.housecallpro.com/pricing/) — retrieved 2026-10-05).
 
-Note on factual claims vs. analysis
-- Statements labeled [VERIFY] are factual claims that need current vendor confirmation before publication.
-- Other statements in this piece are editorial analysis meant to help a small contractor pick the best fit.
+Who this guide is for
+- Solo contractors and small home-service owners (1–10 techs) deciding between Jobber and Housecall Pro.
+- Uses: estimating/quotes, scheduling/dispatch, client communications, invoicing/payments, simple reporting.
 
-Quick comparison table (high-level editorial view)
-| Area | Jobber — editorial take | Housecall Pro — editorial take |
-|---|---:|---|
-| Best for | Small teams wanting simplicity and quick setup (solo to ~5 staff). (Editorial) | Mobile-first teams that want automation, customer communication tools, and marketing features as they scale. (Editorial) |
-| Core focus | Scheduling, quoting, invoicing, and basic CRM for service businesses. [VERIFY] | Scheduling/dispatch, automated customer communications, and marketplace visibility. [VERIFY] |
-| Mobile app | Mobile apps for technicians with job details and invoicing. [VERIFY] | Mobile apps built for field techs, often highlighted for a polished UX. [VERIFY] |
-| Payments | Built-in payments and card processing options available. [VERIFY] | Built-in payments and card processing options available; some users rely heavily on integrated payments. [VERIFY] |
-| Upside | Simpler UI and workflows for small operators; faster onboarding. (Editorial) | Deeper automation, marketing, and add-on modules to support growth. (Editorial) |
-| Downside | May lack some advanced dispatching/marketing features larger teams need. (Editorial) | Can feel bloated or more expensive for teams that only need basic scheduling/invoicing. (Editorial) |
+Quick feature and pricing snapshot (prices retrieved 2026-10-05)
+| Category | Jobber (vendor page) | Housecall Pro (vendor page) |
+|---|---:|---:|
+| Entry plan / starting price (annual billing shown on vendor pages) | Core — starting at $29/mo (1 user recommended on Core) ([Jobber pricing](https://www.getjobber.com/pricing/)) | Basic — $59/mo billed annually (1 user included) ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Next tier for growing teams | Connect — starting at $99/mo (supports up to 5 users on Connect) ([Jobber pricing](https://www.getjobber.com/pricing/)) | Essentials — $149/mo billed annually (5 users included) ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Higher-tier / scaling plan | Grow / Plus — Grow starts at $149/mo; Plus includes advanced features and more users ([Jobber pricing](https://www.getjobber.com/pricing/)) | MAX — $299/mo billed annually (8 users included), open API & dedicated onboarding on MAX ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Free trial | Jobber: free trial available (Jobber notes a 14-day Grow trial in help center) ([Jobber pricing FAQ](https://www.getjobber.com/pricing/)) | Housecall Pro: 14-day free trial on MAX plan ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Users included / add-on user fees | Core supports 1 user; Jobber shows “add users for $29/mo each” on pricing page ([Jobber pricing](https://www.getjobber.com/pricing/)) | Basic: 1 user; Essentials: 5 users; MAX: 8 users. Housecall Pro lists “$35/mo per additional user” on MAX plan note ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Accounting sync | QuickBooks Online sync (Jobber) ([Jobber pricing features](https://www.getjobber.com/pricing/)) | QuickBooks sync; MAX plan includes open API and Zapier access for integrations ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)) |
+| Payments / card processing | Jobber Payments integrated; Jobber lists card rate examples on pricing page (e.g., 2.9% + 30¢ and Tap to Pay 2.7% + 30¢; instant payouts fee 1%) ([Jobber pricing — invoicing & payments section](https://www.getjobber.com/pricing/)) | Housecall Pro offers card and ACH, “card processing rates as low as 2.59%” and bank payments with a 1% fee; Instapay/instant options noted ([Housecall Pro pricing & FAQ](https://www.housecallpro.com/pricing/)) |
+| Pricebook / trade templates | Jobber supports products & services lists, custom fields, and has an app marketplace; specific trade pricebooks not highlighted on pricing page ([Jobber pricing/features](https://www.getjobber.com/pricing/)) | Housecall Pro includes a Default Price Book by industry and pre-built services per trade; Price Book documentation shows trade-tailored defaults and customization ([Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro)) |
+| Built-in AI / 24/7 intake | Jobber offers Jobber AI Voice and Jobber AI Chat references; Receptionist (AI-powered) is available as an add-on ([Jobber help center — Core plan](https://help.getjobber.com/en/articles/the-core-plan/)) | Housecall Pro advertises multiple AI tools (CSR AI for call/chat intake, Analyst AI, Marketing AI, Coach AI, Help AI); CSR AI is available as an add-on ([Housecall Pro FSM overview](https://www.housecallpro.com/field-service-management-software/)) |
+| Vendor claims about scale or customers | Jobber cites community size and features across plans on pricing/help pages ([Jobber pricing/features](https://www.getjobber.com/pricing/)) | Housecall Pro claims “trusted by 200,000+ Pros” and promotes platform-level growth stats on its site (vendor claim) ([Housecall Pro pricing page](https://www.housecallpro.com/pricing/)) |
 
-Who each product fits and why (editorial)
-- Jobber fits best when:
-  - Company size: You’re a solo contractor or a very small crew (1–5 people). (Editorial)
-  - Trade: Typical home-service trades such as HVAC, plumbing, landscaping, cleaning, electrical — especially if work is appointment- or visit-based and not heavily task-splitting. (Editorial)
-  - Operational complexity: You run relatively straightforward workflows (estimate → schedule → job → invoice) and prioritize ease of use over advanced automation. (Editorial)
-  - Buying priorities: Low friction onboarding, simple quoting and invoicing, and reliable mobile access for techs. (Editorial)
+What each product is actually offering (vendor-sourced facts)
+- Jobber
+  - Core plan supports one user and includes online booking, quotes, invoices, and Jobber Payments; Core is positioned for solopreneurs ([Jobber Core plan doc](https://help.getjobber.com/en/articles/the-core-plan/)).  
+  - Jobber’s Connect and Grow tiers add features like automated reminders, two-way SMS, QuickBooks Online sync, job costing, crew scheduling, and more; Jobber lists feature sets per plan on its pricing page ([Jobber pricing/features](https://www.getjobber.com/pricing/)).  
+  - Jobber lists user-add pricing and multiple billing options (monthly, 1-year commitment, annual) and documents cancellation terms in its FAQ ([Jobber pricing page & FAQ](https://www.getjobber.com/pricing/)).  
+  - Jobber offers add-ons such as Receptionist (AI call/text handling), Marketing Suite, and Pipeline; specific add-on prices are shown on Jobber’s site ([Jobber pricing/add-ons](https://www.getjobber.com/pricing/)).  
+- Housecall Pro
+  - Housecall Pro’s Basic, Essentials, and MAX plans include scheduling/dispatch, estimates, invoicing/payments, and mobile apps; Essentials and MAX add routes, GPS, price book features, and more users per plan ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)).  
+  - Housecall Pro provides a Default Price Book pre-loaded per trade and lets you customize services and pricing; the Price Book doc describes trade-specific defaults and a Pricing Insights feature available on MAX with the Mechanical Package ([Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro)).  
+  - Housecall Pro advertises multiple vendor-built AI tools (CSR AI for intake, Analyst AI, Marketing AI, Coach AI, Help AI); CSR AI handles calls and chats and is surfaced as a built-in intake tool on the platform ([Housecall Pro FSM overview](https://www.housecallpro.com/field-service-management-software/)).  
+  - Housecall Pro states its plans include a 14-day free trial and says it does not require long-term contracts (vendor FAQ) ([Housecall Pro pricing & FAQ](https://www.housecallpro.com/pricing/)).
 
-- Housecall Pro fits best when:
-  - Company size: You’re aiming to scale beyond a few techs or already have multiple dispatchers and a need for more automation. (Editorial)
-  - Trade: Trades that emphasize repeat business, customer follow-up, and marketing (e.g., pest control, HVAC maintenance programs) may benefit from built-in marketing/retention features. (Editorial)
-  - Operational complexity: You need advanced dispatching features, recurring jobs/maintenance management, and automated customer notifications. (Editorial)
-  - Buying priorities: You value customer-facing automation, reputation/lead-generation tools, and a polished mobile experience for field staff. (Editorial)
+Practical fit guidance (by size, trade, complexity, priorities)
+- Solo / side-gig contractor (1 person)
+  - Consider Jobber Core if you want the lowest listed annual entry price and a plan Jobber describes specifically for solopreneurs ([Jobber Core plan](https://help.getjobber.com/en/articles/the-core-plan/); [Jobber pricing](https://www.getjobber.com/pricing/)).  
+  - Housecall Pro Basic is also positioned for 1 user but lists a higher annual price on the vendor page ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)). Choose Housecall Pro if you value the vendor’s AI tools or the packaged Basic feature set despite the higher entry price.
+- Small team (2–5 techs)
+  - Jobber Connect supports up to 5 users on its Connect tier and includes reminders, two-way SMS, job costing, and QuickBooks sync ([Jobber pricing](https://www.getjobber.com/pricing/)).  
+  - Housecall Pro Essentials includes 5 users and adds routes, checklist automations, photo reports, and employee GPS tracking ([Housecall Pro pricing](https://www.housecallpro.com/pricing/)). Choose Housecall Pro Essentials if you need trade-tailored pricebooks and native routing/GPS; choose Jobber Connect if you prefer Jobber’s specific automation builder and per-user add pricing shown on Jobber’s pricing page.
+- Trades with frequent flat-rate/pricebook work (HVAC, plumbing, electrical)
+  - Housecall Pro explicitly advertises Default Price Books by industry and pre-built services for mechanical trades; Pricing Insights (market benchmarking) is available on MAX with the Mechanical Package ([Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro)). That makes Housecall Pro stronger where you want an out-of-the-box trade pricebook.  
+  - Jobber supports products & services lists, custom fields, and integrations; Jobber’s pricing page lists many trade industries it serves but does not present the same Default Price Book feature described in Housecall Pro docs ([Jobber pricing/features](https://www.getjobber.com/pricing/); [Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro)).
+- Businesses prioritizing AI-driven intake and automation
+  - Housecall Pro advertises multiple in-platform AI tools and a CSR AI call/chat intake capability ([Housecall Pro FSM overview](https://www.housecallpro.com/field-service-management-software/)).  
+  - Jobber offers Jobber AI Voice / Chat and a Receptionist add-on; Jobber positions Receptionist as an add-on to handle calls and texts ([Jobber Core plan](https://help.getjobber.com/en/articles/the-core-plan/); [Jobber pricing/add-ons](https://www.getjobber.com/pricing/)). Decide whether you need the AI intake as native vs. add-on and compare total costs.
 
-Feature-by-feature (what to check)
-The items below mix editorial notes with factual points that require verification. Look up the specific product pages or vendor documentation for current details.
-
-- Scheduling and dispatch
-  - Editorial: Both products aim to make scheduling easy; choose the one whose calendar and drag-and-drop dispatch tools match your process. (Editorial)
-  - Fact to verify: Which product supports multi-day jobs, split shifts, and multi-tech dispatching natively vs. via add-ons. [VERIFY]
-
-- Estimates and invoicing
-  - Editorial: Both vendors offer quoting and invoicing workflows; the speed of creating a quote and converting it to an invoice is a key usability difference to test in demos. (Editorial)
-  - Fact to verify: Whether each supports templated estimates, line-item cost tracking, progress invoicing, and customizable invoice templates. [VERIFY]
-
-- Payments and card processing
-  - Editorial: Built-in payment processing is often available, but cost and contract terms vary — this is a primary total-cost factor. (Editorial)
-  - Fact to verify: Current payment processor partners, transaction fees, chargeback policies, and whether payment processing is optional or required. [VERIFY]
-
-- Mobile app experience
-  - Editorial: If techs operate mostly from phones, app stability, offline access, and ease of entering notes/photos matter more than desktop features. (Editorial)
-  - Fact to verify: Current mobile app availability (iOS/Android), offline mode behavior, and feature parity with the desktop product. [VERIFY]
-
-- Customer communications and automation
-  - Editorial: Housecall Pro is frequently positioned around automated customer notifications and reviews; Jobber also supports client communication but the depth differs. (Editorial)
-  - Fact to verify: Specific automated communications available (text/email templates, appointment reminders, review requests) and whether some are paid add-ons. [VERIFY]
-
-- Marketing and lead generation
-  - Editorial: If you want built-in marketing (email campaigns, automated review requests, marketplace leads), check which features are included vs. optional. (Editorial)
-  - Fact to verify: Availability and pricing for marketing modules and marketplace lead services. [VERIFY]
-
-- Integrations and ecosystem
-  - Editorial: Common required integrations include QuickBooks (Desktop/Online), accounting exports, payroll, and popular CRMs — confirm compatibility with your existing tools. (Editorial)
-  - Fact to verify: Exact list of integrations each supports and the depth (two-way sync vs. one-way export). [VERIFY]
-
-- Reporting and business intelligence
-  - Editorial: Small contractors often need basic reports (revenue by tech, job profitability, A/R aging). Decide whether built-in reports meet your needs or you’ll need exports. (Editorial)
-  - Fact to verify: Which reports are standard and which require upgrades or custom reporting tools. [VERIFY]
-
-Drawbacks and when each product is a poor fit (editorial)
+Meaningful drawbacks and poor-fit cases (vendor-sourced or plainly derived)
 - When Jobber may be a poor fit
-  - If you need advanced dispatching for many concurrent techs, complex recurring-job scheduling, or sophisticated marketing automation, Jobber’s simplicity may feel limiting. (Editorial)
-  - If you rely heavily on marketplace lead channels and require integrated lead-management beyond basic tools, verify Jobber’s offerings. [VERIFY]
-
+  - If you need vendor-built trade Default Price Books or Pricing Insights (Housecall Pro documents these features), Jobber does not advertise the same out-of-the-box pricebook in its docs ([Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro); [Jobber pricing/features](https://www.getjobber.com/pricing/)).  
+  - If you want built-in, multi-tool AI intake as a platform core feature (Housecall Pro emphasizes CSR AI and multiple AIs), Jobber positions its Receptionist and AI tools as add-ons or beta features ([Housecall Pro FSM overview](https://www.housecallpro.com/field-service-management-software/); [Jobber Core plan](https://help.getjobber.com/en/articles/the-core-plan/)).
 - When Housecall Pro may be a poor fit
-  - If you’re a solo operator or very small team who only needs straightforward scheduling and invoicing, Housecall Pro’s broader feature set and add-ons could be more than you need and increase complexity or cost. (Editorial)
-  - If you want the lightest possible UX and minimal configuration, evaluate whether Housecall Pro requires more setup. (Editorial)
+  - If your first concern is minimizing monthly software spend for a solo operator, Housecall Pro’s Basic annual price listed by the vendor is higher than Jobber’s Core annual price ([Jobber pricing](https://www.getjobber.com/pricing/); [Housecall Pro pricing](https://www.housecallpro.com/pricing/)).  
+  - If you need very large user counts or custom enterprise arrangements, Housecall Pro’s public pages emphasize 1–8 users per standard plan and ask you to contact sales for tailored solutions; Jobber lists higher-team plans and a franchise/custom option—compare both vendors’ enterprise/franchise pages if you need multi-location support ([Jobber pricing](https://www.getjobber.com/pricing/); [Housecall Pro pricing](https://www.housecallpro.com/pricing/)).
 
-What to verify before you buy
-Before committing, confirm these vendor facts (each of these items can materially affect cost or fit):
+What to verify before you buy (facts that change quickly or require confirmation)
+- Exact billing and user fees for your chosen billing cycle: Jobber shows different “starting at” prices depending on billing and team size; also Jobber states “add users for $29/mo each.” Confirm current per-user charges and discounts with the vendor ([Jobber pricing](https://www.getjobber.com/pricing/)).  
+- Which features are included in a specific plan vs. sold as add-ons (Receptionist, Marketing Suite, Pipeline, Price Book advanced features, CSR AI availability, Pricing Insights) — both vendors list add-ons and plan feature sets that can change ([Jobber pricing/add-ons](https://www.getjobber.com/pricing/); [Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro)).  
+- Payment processing rates and instant-payout fees: Jobber lists example rates (2.9% + 30¢; Tap to Pay 2.7% + 30¢; instant payout +1%) on its site; Housecall Pro lists “card processing rates as low as 2.59%” and a 1% bank payment fee—confirm the rates for your business and processing volume with each vendor ([Jobber payments section](https://www.getjobber.com/pricing/); [Housecall Pro pricing FAQ](https://www.housecallpro.com/pricing/)).  
+- Integration specifics you rely on (QuickBooks sync behavior, API access, Zapier, other apps): Jobber documents QuickBooks sync and an app marketplace; Housecall Pro documents QuickBooks sync, Zapier/open API access on MAX—confirm scope and any sync limitations ([Jobber pricing/integrations](https://www.getjobber.com/pricing/); [Housecall Pro pricing](https://www.housecallpro.com/pricing/)).  
+- Onboarding, support levels, and any included white-glove setup or dedicated rep (Jobber lists onboarding packages and premium support as add-ons; Housecall Pro mentions dedicated onboarding on MAX)—confirm availability and cost ([Jobber pricing/add-ons & help center](https://www.getjobber.com/pricing/); [Housecall Pro pricing](https://www.housecallpro.com/pricing/)).
 
-- Current pricing tiers and what features are included in each plan (monthly vs. annual billing differences). [VERIFY]
-- Exact payment processing partners, transaction fees, and contract/PCI terms. [VERIFY]
-- Availability and cost of core add-ons (advanced dispatch, marketing automation, recurring billing, online booking). [VERIFY]
-- Mobile app availability, offline functionality, and feature parity between mobile/desktop. [VERIFY]
-- Integration specifics with your accounting software (QuickBooks Online/Desktop, Xero), POS, payroll, and other tools you rely on. [VERIFY]
-- Whether two-way sync is supported for accounting (avoids manual reconciliation). [VERIFY]
-- Data portability and export formats (in case you need to switch systems later). [VERIFY]
-- Customer support availability and response expectations (phone, chat, email, onboarding help). [VERIFY]
-- Contract length, auto-renewal policies, and cancellation terms. [VERIFY]
+Vendor marketing claims to note (attributed)
+- Housecall Pro states it’s “trusted by 200,000+ Pros” and cites average platform metrics such as “35% avg. revenue growth” and “8+ hours saved per week” as vendor data; treat these as vendor claims to verify on reference calls or demos ([Housecall Pro pricing page](https://www.housecallpro.com/pricing/)).  
+- Jobber states Jobber Payments “get paid on average 4x faster than checks” (vendor claim in core plan doc); treat as vendor-provided performance claim ([Jobber Core plan](https://help.getjobber.com/en/articles/the-core-plan/)).
 
-How to evaluate in practice (editorial checklist for a demo)
-- Prepare 3 real jobs you commonly run and ask the vendor to model them in a demo (estimate → schedule → dispatch → complete → invoice → receive payment). Note friction points. (Editorial)
-- Have a field tech test the mobile app on the device they’ll use and try offline scenarios. (Editorial)
-- Test the accounting sync with a recent set of invoices to see how line-items and taxes map. (Editorial)
-- Run through common customer interactions: appointment reminders, payment receipts, and review requests. (Editorial)
-- Ask for a contract/terms sheet and a written summary of all costs (base fees + add-ons + payment processing). (Editorial)
+Final decision framework (three quick steps)
+1. Match must-have features to plans: list the three features you cannot do without (e.g., industry Default Price Book, AI call intake, QuickBooks two-way sync, flat-rate pricebook, route optimization). Use the vendor docs above to see which plan includes each feature and whether it’s an add-on ([Housecall Pro Price Book docs](https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro); [Jobber pricing/features](https://www.getjobber.com/pricing/)).  
+2. Calculate real first-year cost: include plan price (annual vs monthly), required add-ons (Receptionist, Marketing Suite, CSR AI, onboarding), and extra users or processing fees. Don’t assume a single headline price—confirm in a quote from each vendor. (See both pricing pages linked above.)  
+3. Run a short trial or demo script focused on your workflow: request a trial or demo that exercises your top workflows—booking → quote → schedule → mobile job completion → invoice → payments → accounting sync—and ask for references from similar trades/size. Both vendors offer trials/demos per their pages ([Jobber pricing](https://www.getjobber.com/pricing/); [Housecall Pro pricing](https://www.housecallpro.com/pricing/)).
 
-Decision framework (not a hard sell)
-Use this simple decision tree for small contractors:
+Relevant internal links (to add on publish)
+- best-field-service-software-1-5-person-business  
+- jobber-review  
+- housecall-pro-review
 
-1. What’s your team size now and in 12–24 months?
-   - If solo or 1–5 and you expect to stay small: prioritize low setup time, simple UI, and predictable pricing. Test Jobber first (editorial).
-   - If you expect to grow to multiple dispatchers/techs or want automated marketing and advanced dispatch: prioritize scalability and automation. Test Housecall Pro first (editorial).
-
-2. What’s your top operational pain?
-   - Scheduling/dispatch chaos → evaluate live dispatch features and tech routing. (Editorial)
-   - Slow estimate-to-invoice conversions → test quoting and one-tap invoice conversion. (Editorial)
-   - Cashflow and payments → verify payment options and speed of settlement. [VERIFY]
-   - Customer acquisition/retention → test marketing/review automation modules. [VERIFY]
-
-3. How important is mobile-first UX for techs?
-   - Critical → put the mobile app through real-world tests. (Editorial)
-   - Secondary → desktop admin efficiency may weigh more. (Editorial)
-
-4. What integrations are must-haves?
-   - List them and require the vendor to demonstrate the exact integration in your demo. (Editorial)
-
-5. Total cost transparency
-   - Demand a full written cost summary (base + mandatory add-ons + average payment processing) before signing. [VERIFY]
-
-Final notes (editorial)
-- Don’t pick based on marketing alone. Book side-by-side demos, use trial periods to run real jobs, and insist on written clarity about integrations and payment processing. (Editorial)
-- Small contractors often prioritize fast, reliable cash flow and simple field workflows over bells and whistles — choose the tool that reduces day-to-day friction for your team. (Editorial)
+Further reading (vendor docs used)
+- Jobber pricing and plan features — https://www.getjobber.com/pricing/ (retrieved 2026-10-05)  
+- Jobber Core plan details — https://help.getjobber.com/en/articles/the-core-plan/ (retrieved 2026-10-05)  
+- Jobber Connect plan details — https://help.getjobber.com/en/articles/the-connect-plan/ (retrieved 2026-10-05)  
+- Housecall Pro pricing & plans — https://www.housecallpro.com/pricing/ (retrieved 2026-10-05)  
+- Housecall Pro field service management overview (AI, FSM features) — https://www.housecallpro.com/field-service-management-software/ (retrieved 2026-10-05)  
+- Housecall Pro Price Book docs — https://help.housecallpro.com/en/articles/9778163-how-to-use-price-book-by-housecall-pro (retrieved 2026-10-05)
 
 EDITOR NOTES
-- Facts that need verification
-  - Jobber’s current list of core features (scheduling, estimates, invoicing, mobile app capabilities). [VERIFY]
-  - Housecall Pro’s current list of core features (dispatching, automated communications, marketing modules). [VERIFY]
-  - Specific plan names, their feature inclusions, and pricing for each vendor. [VERIFY]
-  - Payment processing partners and transaction fee structures for both vendors. [VERIFY]
-  - Mobile app availability (iOS/Android), offline mode behavior, and exact feature parity. [VERIFY]
-  - Integration lists and depth of integration (QuickBooks Online/Desktop, Xero, Zapier, etc.). [VERIFY]
-  - Availability and pricing of add-ons (marketing, advanced dispatch, recurring billing, online booking). [VERIFY]
-  - Customer support options (phone, chat, email) and onboarding services. [VERIFY]
-  - Contract, cancellation, and auto-renewal terms. [VERIFY]
+- Unsupported or ambiguous facts needing verification: exact additional-user pricing across all Housecall Pro plans (public page shows “$35/mo per additional user” on MAX only); precise Jobber per-user charge and how it applies across billing options (Jobber page shows “add users for $29/mo each” but plan-page user inclusions vary by team size). Confirm with vendor quotes.  
+- Failed fetches: none; all required vendor pages were available in the research packet.  
+- Affiliate links still needing insertion: yes — add affiliate URLs where appropriate.  
+- Planned internal links to insert on publish: best-field-service-software-1-5-person-business, jobber-review, housecall-pro-review.  
+- Research retrieval timestamp: 2026-10-05T00:18:05.307023+00:00.
 
-- Suggested primary-source pages to research
-  - Vendor feature pages: the "Features" or "What we do" pages for Jobber and Housecall Pro to confirm current functionality and marketing positioning.
-  - Pricing pages: current pricing tiers and feature matrices for Jobber and Housecall Pro to confirm what’s included per plan.
-  - Payments/documentation pages: vendor pages explaining payment processing partners, transaction fees, and settlement timing for each platform.
-  - Mobile app pages: App Store and Google Play listing details and vendor documentation on offline mode and feature parity.
-  - Integrations/support pages: lists and docs for QuickBooks/Xero/other integrations and their sync behavior.
-  - Terms of service and cancellation policy pages for both vendors to verify contract terms and auto-renewal.
-
-- Affiliate links that still need insertion
-  - Jobber core product link (affiliate)
-  - Housecall Pro core product link (affiliate)
-
-- Planned internal links to insert
-  - /best-field-service-software-1-5-person-business
-  - /jobber-review
-  - /housecall-pro-review
-
-If you want, I can convert this into separate side-by-side demos scripts to give contractors a checklist to use during vendor demos.
+If you want, I can draft a one-page demo script you can use with each vendor’s sales rep to verify the add-on costs, onboarding, and QuickBooks sync behavior specific to your business.
