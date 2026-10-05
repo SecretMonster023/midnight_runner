@@ -9,11 +9,14 @@ import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 
+from editor import quality_control
+
 ROOT = Path(__file__).parent
 TOPICS_FILE = ROOT / "topics.json"
 SOURCES_FILE = ROOT / "sources.json"
 OUTPUT_DIR = ROOT / "content"
 RESEARCH_DIR = ROOT / "research"
+PUBLISH_DIR = ROOT / "publish"
 
 API_KEY = os.environ.get("OPENAI_API_KEY")
 MODEL = os.environ.get("OPENAI_MODEL", "gpt-5-mini")
@@ -147,6 +150,7 @@ def generate_article(topic, packet):
 def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
     RESEARCH_DIR.mkdir(exist_ok=True)
+    PUBLISH_DIR.mkdir(exist_ok=True)
     topics = sorted(load_json(TOPICS_FILE), key=lambda item: item["priority"])
     source_map = load_json(SOURCES_FILE)
 
@@ -172,7 +176,13 @@ def main():
         print(f"Generating evidence-grounded draft: {topic['title']}")
         article = generate_article(topic, packet)
         path.write_text(article + "\n", encoding="utf-8")
-        print(f"Saved draft: {path}")
+        print(f"Saved working draft: {path}")
+
+        print(f"Running editorial QC: {topic['title']}")
+        final_article = quality_control(client, MODEL, topic, article)
+        publish_path = PUBLISH_DIR / f"{topic['slug']}.md"
+        publish_path.write_text(final_article + "\n", encoding="utf-8")
+        print(f"Saved publish-ready article: {publish_path}")
         generated += 1
 
     if generated == 0:
