@@ -51,4 +51,10 @@ Return only the final publish-ready Markdown.
     if len(final) < 1000:
         raise ValueError("Publication gate failed; QC output is unexpectedly short.")
 
-    return final
+    # Git it Write reads YAML front matter to set the WordPress post status.
+    # Enforce draft-only imports even when the model emits its own front matter.
+    import re
+    final = re.sub(r"^---\s*\n[\s\S]*?\n---\s*\n", "", final).lstrip()
+    import json
+    safe_title = json.dumps(topic["title"], ensure_ascii=False)
+    return f"---\ntitle: {safe_title}\npost_status: draft\n---\n\n{final}"
