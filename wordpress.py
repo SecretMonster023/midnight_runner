@@ -67,7 +67,34 @@ def wp_request(method, endpoint, **kwargs):
     response = requests.request(
         method, url, auth=(WP_USERNAME, WP_APP_PASSWORD), timeout=30, **kwargs
     )
-    response.raise_for_status()
+    if not response.ok:
+        # Do not log request headers, credentials, response bodies, or full URLs.
+        # WordPress REST errors normally provide a machine-readable code and message.
+        code = "unknown"
+        message = "No structured WordPress error message returned"
+        try:
+            detail = response.json()
+            if isinstance(detail, dict):
+                raw_code = detail.get("code")
+                raw_message = detail.get("message")
+                if isinstance(raw_code, str) and re.fullmatch(r"[a-zA-Z0-9_-]{1,80}", raw_code):
+                    code = raw_code
+                if isinstance(raw_message, str):
+                    # Avoid printing unexpected secrets or arbitrary server responses.
+                    safe_messages = {
+                        "rest_forbidden": "WordPress denied access",
+                        "rest_cannot_view": "WordPress denied permission to view posts",
+                        "rest_not_logged_in": "WordPress did not recognize an authenticated user",
+                        "rest_invalid_param": "WordPress rejected a request parameter",
+                        "rest_no_route": "WordPress could not find the requested API route",
+                        "application_passwords_disabled": "WordPress Application Passwords are disabled",
+                        "incorrect_password": "WordPress rejected the password",
+                    }
+                    message = safe_messages.get(code, "WordPress returned a structured error")
+        except ValueError:
+            message = "Non-JSON response (possibly hosting firewall or security plugin)"
+        print(f"WordPress API diagnostic: HTTP {response.status_code}; code={code}; detail={message}; endpoint={endpoint.split('/')[0]}")
+        raise RuntimeError("WordPress API request failed; see sanitized diagnostic above")
     return response.json()
 
 def upsert_draft(path):
