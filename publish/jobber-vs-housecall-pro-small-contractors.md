@@ -1,3 +1,8 @@
+---
+title: Jobber vs Housecall Pro: Which Is Better for a Small Contractor?
+post_status: draft
+---
+
 # Jobber vs Housecall Pro: Which Is Better for a Small Contractor?
 
 Affiliate disclosure: Trade Business Lab may earn an affiliate fee if you click a vendor link and buy a paid plan. We don’t let that influence our coverage.
