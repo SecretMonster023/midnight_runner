@@ -16,6 +16,11 @@ on:
         required: false
         type: boolean
         default: false
+      send_to_wordpress:
+        description: "Send QC-approved article to WordPress as a draft"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -26,14 +31,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install openai requests beautifulsoup4
+
       - name: Research and generate draft
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -42,6 +50,7 @@ jobs:
           TOPIC_ID: ${{ inputs.topic_id || '' }}
           REGENERATE: ${{ inputs.regenerate || 'false' }}
         run: python generator.py
+
       - name: Commit research and generated draft
         run: |
           git config user.name "github-actions[bot]"
@@ -49,7 +58,18 @@ jobs:
           git add content/ research/ publish/
           if git diff --cached --quiet; then
             echo "No new draft to commit."
-            exit 0
+          else
+            git commit -m "draft: generate evidence-grounded Trade Business Lab article"
+            git push
           fi
-          git commit -m "draft: generate evidence-grounded Trade Business Lab article"
-          git push
+
+      - name: Send selected publish-ready article to WordPress draft
+        if: ${{ inputs.send_to_wordpress == true && inputs.topic_id != '' }}
+        env:
+          TOPIC_ID: ${{ inputs.topic_id || '' }}
+          WP_URL: ${{ secrets.WP_URL }}
+          WP_USERNAME: ${{ secrets.WP_USERNAME }}
+          WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
+        run: |
+          SLUG=$(python -c 'import json,os; topics=json.load(open("topics.json")); topic=next(t for t in topics if t["id"]==os.environ["TOPIC_ID"]); print(topic["slug"])')
+          python wordpress.py "publish/$SLUG.md"
