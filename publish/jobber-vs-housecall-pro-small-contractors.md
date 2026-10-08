@@ -1,5 +1,5 @@
 ---
-title: Jobber vs Housecall Pro: Which Is Better for a Small Contractor?
+title: "Jobber vs Housecall Pro: Which Is Better for a Small Contractor?"
 post_status: draft
 ---
 
