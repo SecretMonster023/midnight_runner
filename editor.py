@@ -55,4 +55,6 @@ Return only the final publish-ready Markdown.
     # Enforce draft-only imports even when the model emits its own front matter.
     import re
     final = re.sub(r"^---\s*\n[\s\S]*?\n---\s*\n", "", final).lstrip()
-    return f"---\ntitle: {topic['title']}\npost_status: draft\n---\n\n{final}"
+    import json
+    safe_title = json.dumps(topic["title"], ensure_ascii=False)
+    return f"---\ntitle: {safe_title}\npost_status: draft\n---\n\n{final}"
