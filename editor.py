@@ -18,13 +18,14 @@ Rules:
 - Use actual Markdown ## headings and ### subheadings, not bare lines that look like headings.
 - Keep paragraphs short (2-4 sentences), with simple language and few nested bullets.
 - Make each section answer a practical buying question, not merely enumerate features.
-- Include at most one concise comparison table with 3 columns and 6 short rows. No long sentences or links inside table cells; cite in nearby prose.
+- Include at most one concise comparison table with 3 columns and 5 short rows. Each table cell must be a short phrase (ideally under 35 characters); NO citations, prices plus footnotes, URLs, or long descriptions inside cells. Explain details and cite in normal paragraphs below.
 - Explain the significance of the table rather than repeating every row.
 - Use descriptive source links sparingly and close to supported claims; avoid repetitive citation chains.
 - End with a practical buying checklist or decision, not a repetitive generic Summary.
 - Never fabricate hands-on testing, customer experiences, testimonials, or statistics.
 - Preserve accuracy and material qualifications even when simplifying prose.
-- Keep the affiliate disclosure near the top.
+- Keep exactly one affiliate disclosure near the top, before the main content; never repeat it as a heading, note, or paragraph elsewhere.
+- Prefer short standalone bullet points rather than nested lists. Avoid an exhaustive sources dump at the bottom; use linked source names in context.
 - Keep a concise "What to verify before you buy" section when appropriate.
 - Output only the finished Markdown article, with no preface or afterword.
 """
@@ -64,6 +65,19 @@ Return only the final publish-ready Markdown.
 
     if len(final) < 1000:
         raise ValueError("Publication gate failed; QC output is unexpectedly short.")
+
+    # Deterministically remove duplicate affiliate-disclosure paragraphs/headings.
+    # Preserve the first disclosure and keep it near the top.
+    lines = final.splitlines()
+    seen_disclosure = False
+    cleaned = []
+    for line in lines:
+        if "affiliate disclosure" in line.lower() or line.lower().lstrip().startswith("disclosure:"):
+            if seen_disclosure:
+                continue
+            seen_disclosure = True
+        cleaned.append(line)
+    final = "\n".join(cleaned).strip()
 
     # Git it Write reads YAML front matter to set the WordPress post status.
     # Enforce draft-only imports even when the model emits its own front matter.
