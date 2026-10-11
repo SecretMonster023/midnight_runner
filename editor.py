@@ -13,7 +13,17 @@ Rules:
 - Remove repetition, filler, hype, excessive caveats, and awkward AI phrasing.
 - Recommendations must match the evidence: prefer "better for X" over unsupported claims that one product is objectively better.
 - Preserve meaningful drawbacks and tradeoffs.
-- Improve headings, scanability, paragraph flow, and comparison tables.
+- Write like a careful trade-business editor: direct, specific, varied sentences; no keyword stuffing or robotic templates.
+- Open with a 2-3 sentence verdict that explains which buyer should choose which option.
+- Use actual Markdown ## headings and ### subheadings, not bare lines that look like headings.
+- Keep paragraphs short (2-4 sentences), with simple language and few nested bullets.
+- Make each section answer a practical buying question, not merely enumerate features.
+- Include at most one concise comparison table with 3 columns and 6 short rows. No long sentences or links inside table cells; cite in nearby prose.
+- Explain the significance of the table rather than repeating every row.
+- Use descriptive source links sparingly and close to supported claims; avoid repetitive citation chains.
+- End with a practical buying checklist or decision, not a repetitive generic Summary.
+- Never fabricate hands-on testing, customer experiences, testimonials, or statistics.
+- Preserve accuracy and material qualifications even when simplifying prose.
 - Keep the affiliate disclosure near the top.
 - Keep a concise "What to verify before you buy" section when appropriate.
 - Output only the finished Markdown article, with no preface or afterword.
@@ -47,6 +57,10 @@ Return only the final publish-ready Markdown.
     failures = [phrase for phrase in BANNED_PUBLICATION_PHRASES if phrase.lower() in final.lower()]
     if failures:
         raise ValueError(f"Publication gate failed; QC output contains internal text: {failures}")
+
+    import re
+    if not re.search(r"(?m)^## .+", final):
+        raise ValueError("Publication gate failed: missing Markdown section headings.")
 
     if len(final) < 1000:
         raise ValueError("Publication gate failed; QC output is unexpectedly short.")
