@@ -52,16 +52,25 @@ END WORKING DRAFT
 
 Return only the final publish-ready Markdown.
 """
-    response = client.responses.create(model=model, instructions=QC_PROMPT, input=prompt)
-    final = response.output_text.strip()
+    import re
+    for attempt in range(2):
+        extra = (
+            " Your previous response omitted Markdown headings. Rewrite with at least "
+            "three literal lines beginning with ## followed by a space."
+            if attempt else ""
+        )
+        response = client.responses.create(
+            model=model, instructions=QC_PROMPT + extra, input=prompt
+        )
+        final = response.output_text.strip()
+        if re.search(r"(?m)^## .+", final):
+            break
+    else:
+        raise ValueError("Publication gate failed after retry: missing Markdown section headings.")
 
     failures = [phrase for phrase in BANNED_PUBLICATION_PHRASES if phrase.lower() in final.lower()]
     if failures:
         raise ValueError(f"Publication gate failed; QC output contains internal text: {failures}")
-
-    import re
-    if not re.search(r"(?m)^## .+", final):
-        raise ValueError("Publication gate failed: missing Markdown section headings.")
 
     if len(final) < 1000:
         raise ValueError("Publication gate failed; QC output is unexpectedly short.")
