@@ -14,12 +14,13 @@ Rules:
 - Recommendations must match the evidence: prefer "better for X" over unsupported claims that one product is objectively better.
 - Preserve meaningful drawbacks and tradeoffs.
 - Write like a careful trade-business editor: direct, specific, varied sentences; no keyword stuffing or robotic templates.
-- Open with a 2-3 sentence verdict that explains which buyer should choose which option.
+- Open with a ## Verdict heading followed by a concise natural recommendation. Never print editorial directions such as (2-3 sentences).
 - Use actual Markdown ## headings and ### subheadings, not bare lines that look like headings.
 - Keep paragraphs short (2-4 sentences), with simple language and few nested bullets.
 - Make each section answer a practical buying question, not merely enumerate features.
 - Include at most one concise comparison table with 3 columns and 5 short rows. Each table cell must be a short phrase (ideally under 35 characters); NO citations, prices plus footnotes, URLs, or long descriptions inside cells. Explain details and cite in normal paragraphs below.
 - Explain the significance of the table rather than repeating every row.
+- Convert verified source URLs into clickable Markdown links with descriptive anchor text, such as [Jobber pricing](https://www.getjobber.com/pricing/). Never leave naked URLs or bracket-only references in reader-facing text. Do not invent link destinations.
 - Use descriptive source links sparingly and close to supported claims; avoid repetitive citation chains.
 - End with a practical buying checklist or decision, not a repetitive generic Summary.
 - Never fabricate hands-on testing, customer experiences, testimonials, or statistics.
@@ -71,6 +72,9 @@ Return only the final publish-ready Markdown.
     failures = [phrase for phrase in BANNED_PUBLICATION_PHRASES if phrase.lower() in final.lower()]
     if failures:
         raise ValueError(f"Publication gate failed; QC output contains internal text: {failures}")
+
+    if re.search(r"(?im)^\\s*(?:#{1,4}\\s*)?Verdict\\s*\\(.*sentences.*\\)", final):
+        raise ValueError("Publication gate failed: leaked editorial instructions.")
 
     if len(final) < 1000:
         raise ValueError("Publication gate failed; QC output is unexpectedly short.")
