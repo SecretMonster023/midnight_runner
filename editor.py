@@ -67,6 +67,36 @@ def validate(article: str, allowed_urls: set[str]) -> list[str]:
             errors.append("unformatted or redundant section: " + label)
     return errors
 
+def seo_metadata(topic: dict) -> dict:
+    """Stable SEO fields for Git it Write / Yoast; no additional API calls."""
+    title = topic["title"]
+    intent = topic["intent"]
+    if intent == "commercial_best":
+        keyword = re.sub(r"\\s*\\([^)]*\\)", "", title).strip().lower()
+        seo_title = title.split(" (")[0] + " | Trade Business Lab"
+        trade = ("HVAC" if "hvac" in title.lower() else
+                 "plumbing" if "plumbing" in title.lower() else
+                 "electrical" if "electrical" in title.lower() else "field service")
+        description = (f"Compare Jobber, Housecall Pro, and ServiceTitan for small {trade} businesses. "
+                       "Explore features, costs, and which software fits your crew.")
+    elif intent == "commercial_comparison":
+        keyword = title.split(":")[0].strip().lower()
+        seo_title = title.split(":")[0] + ": Small Business Comparison"
+        description = (f"Compare {title.split(':')[0]} for small contractors. "
+                       "Explore features, costs, drawbacks, and which option fits your business.")
+    else:
+        keyword = title.split(":")[0].strip().lower()
+        seo_title = title.split(":")[0] + ": Features, Costs & Fit"
+        description = (f"Read our {title.split(':')[0]} for small contractors. "
+                       "Explore features, costs, limitations, and who the software suits.")
+    return {
+        "keyword": keyword[:100],
+        "title": seo_title[:65],
+        "description": description[:155],
+        "category": "software",
+    }
+
+
 def quality_control(client: OpenAI, model: str, topic: dict, working_draft: str,
                     allowed_urls=None) -> str:
     allowed_urls = set(allowed_urls or [])
@@ -89,6 +119,15 @@ def quality_control(client: OpenAI, model: str, topic: dict, working_draft: str,
         errors = validate(final, allowed_urls)
         if not errors:
             safe_title = json.dumps(topic["title"], ensure_ascii=False)
-            return f"---\ntitle: {safe_title}\npost_status: draft\n---\n\n{final}"
+            meta = seo_metadata(topic)
+            return (
+                f"---\ntitle: {safe_title}\npost_status: draft\n"
+                f"taxonomy:\n    category:\n        - {meta['category']}\n"
+                f"custom_fields:\n"
+                f"    _yoast_wpseo_focuskw: {json.dumps(meta['keyword'])}\n"
+                f"    _yoast_wpseo_title: {json.dumps(meta['title'])}\n"
+                f"    _yoast_wpseo_metadesc: {json.dumps(meta['description'])}\n"
+                f"---\n\n{final}"
+            )
         prompt += ("\n\nPREVIOUS FAILED VERSION:\n" + final)
     raise ValueError("Publication gate failed after 3 attempts: " + "; ".join(errors))
