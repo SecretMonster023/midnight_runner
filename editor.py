@@ -1,101 +1,94 @@
+import json
+import re
+from urllib.parse import urlparse
+
 from openai import OpenAI
 
-QC_PROMPT = """You are the senior editor and publication quality-control gate for Trade Business Lab.
-
-Edit the supplied evidence-grounded working draft into a clean, useful article for home-service contractors.
-
-Rules:
-- Do not add new factual information.
-- Preserve source links that support factual claims.
-- Do not invent prices, features, statistics, URLs, testimonials, affiliate links, or firsthand experience.
-- Attribute vendor performance and marketing claims to the vendor.
-- Remove EDITOR NOTES, internal workflow notes, planned-link placeholders, and assistant-style closings.
-- Remove repetition, filler, hype, excessive caveats, and awkward AI phrasing.
-- Recommendations must match the evidence: prefer "better for X" over unsupported claims that one product is objectively better.
-- Preserve meaningful drawbacks and tradeoffs.
-- Write like a careful trade-business editor: direct, specific, varied sentences; no keyword stuffing or robotic templates.
-- Open with a ## Verdict heading followed by a concise natural recommendation. Never print editorial directions such as (2-3 sentences).
-- Use actual Markdown ## headings and ### subheadings, not bare lines that look like headings.
-- Keep paragraphs short (2-4 sentences), with simple language and few nested bullets.
-- Make each section answer a practical buying question, not merely enumerate features.
-- Include at most one concise comparison table with 3 columns and 5 short rows. Each table cell must be a short phrase (ideally under 35 characters); NO citations, prices plus footnotes, URLs, or long descriptions inside cells. Explain details and cite in normal paragraphs below.
-- Explain the significance of the table rather than repeating every row.
-- Convert verified source URLs into clickable Markdown links with descriptive anchor text, such as [Jobber pricing](https://www.getjobber.com/pricing/). Never leave naked URLs or bracket-only references in reader-facing text. Do not invent link destinations.
-- Use descriptive source links sparingly and close to supported claims; avoid repetitive citation chains.
-- End with a practical buying checklist or decision, not a repetitive generic Summary.
-- Never fabricate hands-on testing, customer experiences, testimonials, or statistics.
-- Preserve accuracy and material qualifications even when simplifying prose.
-- Keep exactly one affiliate disclosure near the top, before the main content; never repeat it as a heading, note, or paragraph elsewhere.
-- Prefer short standalone bullet points rather than nested lists. Avoid an exhaustive sources dump at the bottom; use linked source names in context.
-- Keep a concise "What to verify before you buy" section when appropriate.
-- Output only the finished Markdown article, with no preface or afterword.
+QC_PROMPT = """You are the senior publication editor for Trade Business Lab.
+Rewrite the supplied draft as a useful, concise buying guide for home-service contractors.
+Do not add facts, URLs, prices, tests, experiences, or features. Preserve material caveats.
+Attribute vendor marketing claims. Use only source URLs present in the working draft or its
+research packet. Turn relevant verified URLs into descriptive inline Markdown links:
+[Jobber pricing](https://www.getjobber.com/pricing/). Link claims where discussed, not in a
+'Vendor pages cited' dump. Never write unlinked 'See Jobber pricing' references.
+Use real ## section headings and ### subsections, never bare section labels.
+Start with exactly one affiliate disclosure followed by ## Verdict.
+Use one compact comparison table (3 columns, 3-5 product rows; no mixed 'Trial' rows).
+Keep meaningful product drawbacks, but consolidate repeated checklists into one
+## What to verify before you buy section near the end.
+No editor notes, instructions, filler, redundant conclusions, or raw URL lists.
+End with a useful buying action, not a generic summary.
+Return ONLY finished Markdown, no YAML front matter.
 """
 
-BANNED_PUBLICATION_PHRASES = (
-    "EDITOR NOTES",
-    "If you want, I can",
-    "planned internal links",
-    "affiliate links still needing insertion",
+BANNED = (
+    "editor notes", "if you want, i can", "planned internal links",
+    "affiliate links still needing insertion", "vendor pages cited",
+    "significant vendor-sourced details and where to check them",
+    "what to verify right away with vendors", "practical decision checklist",
+    "final, practical recommendations", "what the table shows",
 )
 
-def quality_control(client: OpenAI, model: str, topic: dict, working_draft: str) -> str:
-    prompt = f"""Edit this working draft for publication.
+def validate(article: str, allowed_urls: set[str]) -> list[str]:
+    errors = []
+    lines = article.splitlines()
+    headings = re.findall(r"(?m)^## (.+)$", article)
+    if not headings or headings[0].strip().lower() != "verdict":
+        errors.append("first section must be ## Verdict")
+    if len(headings) < 3:
+        errors.append("at least three ## sections required")
+    if sum("affiliate disclosure" in line.lower() for line in lines) != 1:
+        errors.append("exactly one affiliate disclosure required")
+    if not any("affiliate disclosure" in line.lower() for line in lines[:5]):
+        errors.append("affiliate disclosure must be near top")
+    if len(article) < 1200:
+        errors.append("article too short")
+    for phrase in BANNED:
+        if phrase in article.lower():
+            errors.append("banned editorial phrase: " + phrase)
+    if re.search(r"(?im)^\s*(?:#{1,4}\s*)?verdict\s*\([^)]*sentences[^)]*\)", article):
+        errors.append("leaked verdict instructions")
+    if re.search(r"(?m)^(?!.*\]\(https?://).*https?://\S+", article):
+        errors.append("bare URLs instead of Markdown links")
+    links = re.findall(r"\[[^\]]+\]\((https?://[^)]+)\)", article)
+    if len(links) < 3:
+        errors.append("fewer than three clickable source links")
+    if any(url not in allowed_urls for url in links):
+        errors.append("unapproved or invented source URL")
+    if article.count("|---") + article.count("| ---") > 1:
+        errors.append("more than one comparison table")
+    if not re.search(r"(?im)^## What to verify before you buy\s*$", article):
+        errors.append("missing consolidated buying checklist")
+    # Detect common unformatted standalone section labels.
+    for label in ("Meaningful drawbacks", "Comparison table (quick view)",
+                  "Who each product fits", "What the table shows",
+                  "Final, practical recommendations"):
+        if re.search(r"(?im)^" + re.escape(label) + r"[^\n]*$", article):
+            errors.append("unformatted or redundant section: " + label)
+    return errors
 
-Title: {topic['title']}
-Audience: {topic['audience']}
-Search intent: {topic['intent']}
-
-WORKING DRAFT
-==============
-{working_draft}
-==============
-END WORKING DRAFT
-
-Return only the final publish-ready Markdown.
-"""
-    import re
-    for attempt in range(2):
-        extra = (
-            " Your previous response omitted Markdown headings. Rewrite with at least "
-            "three literal lines beginning with ## followed by a space."
-            if attempt else ""
-        )
-        response = client.responses.create(
-            model=model, instructions=QC_PROMPT + extra, input=prompt
-        )
+def quality_control(client: OpenAI, model: str, topic: dict, working_draft: str,
+                    allowed_urls=None) -> str:
+    allowed_urls = set(allowed_urls or [])
+    # Also allow original draft links if this function is used without a research packet.
+    if not allowed_urls:
+        allowed_urls = set(re.findall(r"https?://[^\s)<>]+", working_draft))
+    prompt = (f"Title: {topic['title']}\nAudience: {topic['audience']}\n"
+              f"Allowed source URLs (do not invent others):\n" +
+              "\n".join(sorted(allowed_urls)) +
+              "\n\nWORKING DRAFT:\n" + working_draft)
+    errors = []
+    for attempt in range(3):
+        instructions = QC_PROMPT
+        if errors:
+            instructions += ("\nYour previous version failed checks. Fix ALL these issues "
+                             "without adding new facts:\n- " + "\n- ".join(errors))
+        response = client.responses.create(model=model, instructions=instructions, input=prompt)
         final = response.output_text.strip()
-        if re.search(r"(?m)^## .+", final):
-            break
-    else:
-        raise ValueError("Publication gate failed after retry: missing Markdown section headings.")
-
-    failures = [phrase for phrase in BANNED_PUBLICATION_PHRASES if phrase.lower() in final.lower()]
-    if failures:
-        raise ValueError(f"Publication gate failed; QC output contains internal text: {failures}")
-
-    if re.search(r"(?im)^\\s*(?:#{1,4}\\s*)?Verdict\\s*\\(.*sentences.*\\)", final):
-        raise ValueError("Publication gate failed: leaked editorial instructions.")
-
-    if len(final) < 1000:
-        raise ValueError("Publication gate failed; QC output is unexpectedly short.")
-
-    # Deterministically remove duplicate affiliate-disclosure paragraphs/headings.
-    # Preserve the first disclosure and keep it near the top.
-    lines = final.splitlines()
-    seen_disclosure = False
-    cleaned = []
-    for line in lines:
-        if "affiliate disclosure" in line.lower() or line.lower().lstrip().startswith("disclosure:"):
-            if seen_disclosure:
-                continue
-            seen_disclosure = True
-        cleaned.append(line)
-    final = "\n".join(cleaned).strip()
-
-    # Git it Write reads YAML front matter to set the WordPress post status.
-    # Enforce draft-only imports even when the model emits its own front matter.
-    import re
-    final = re.sub(r"^---\s*\n[\s\S]*?\n---\s*\n", "", final).lstrip()
-    import json
-    safe_title = json.dumps(topic["title"], ensure_ascii=False)
-    return f"---\ntitle: {safe_title}\npost_status: draft\n---\n\n{final}"
+        final = re.sub(r"^---\s*\n[\s\S]*?\n---\s*\n", "", final).strip()
+        errors = validate(final, allowed_urls)
+        if not errors:
+            safe_title = json.dumps(topic["title"], ensure_ascii=False)
+            return f"---\ntitle: {safe_title}\npost_status: draft\n---\n\n{final}"
+        prompt += ("\n\nPREVIOUS FAILED VERSION:\n" + final)
+    raise ValueError("Publication gate failed after 3 attempts: " + "; ".join(errors))
