@@ -48,7 +48,7 @@ def validate(article: str, allowed_urls: set[str]) -> list[str]:
             errors.append("banned editorial phrase: " + phrase)
     if re.search(r"(?im)^\s*(?:#{1,4}\s*)?verdict\s*\([^)]*sentences[^)]*\)", article):
         errors.append("leaked verdict instructions")
-    if re.search(r"(?m)^(?!\s*\\|).*https?://\\S+", article):
+    if re.search(r"(?m)^(?!.*\]\(https?://).*https?://\S+", article):
         errors.append("bare URLs instead of Markdown links")
     links = re.findall(r"\[[^\]]+\]\((https?://[^)]+)\)", article)
     if len(links) < 3:
@@ -85,7 +85,7 @@ def quality_control(client: OpenAI, model: str, topic: dict, working_draft: str,
                              "without adding new facts:\n- " + "\n- ".join(errors))
         response = client.responses.create(model=model, instructions=instructions, input=prompt)
         final = response.output_text.strip()
-        final = re.sub(r"^---\s*\n[\s\\S]*?\n---\s*\n", "", final).strip()
+        final = re.sub(r"^---\s*\n[\s\S]*?\n---\s*\n", "", final).strip()
         errors = validate(final, allowed_urls)
         if not errors:
             safe_title = json.dumps(topic["title"], ensure_ascii=False)
