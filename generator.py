@@ -179,7 +179,8 @@ def main():
         print(f"Saved working draft: {path}")
 
         print(f"Running editorial QC: {topic['title']}")
-        allowed_urls = {src["url"] for item in packet["products"].values() for src in item.get("sources", []) if not src.get("error")}\n        final_article = quality_control(client, MODEL, topic, article, allowed_urls)
+        allowed_urls = {src["url"] for item in packet["products"].values() for src in item.get("sources", []) if not src.get("error")}
+        final_article = quality_control(client, MODEL, topic, article, allowed_urls)
         publish_path = PUBLISH_DIR / f"{topic['slug']}.md"
         publish_path.write_text(final_article + "\n", encoding="utf-8")
         print(f"Saved publish-ready article: {publish_path}")
