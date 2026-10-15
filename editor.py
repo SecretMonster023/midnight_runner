@@ -55,7 +55,14 @@ def validate(article: str, allowed_urls: set[str]) -> list[str]:
         errors.append("fewer than three clickable source links")
     if any(url not in allowed_urls for url in links):
         errors.append("unapproved or invented source URL")
-    if article.count("|---") + article.count("| ---") > 1:
+    # Count Markdown table separator ROWS, not individual columns.
+    # A single 3-column table contains multiple --- separators.
+    separator_rows = [
+        line for line in lines
+        if "|" in line and re.fullmatch(r"[\\s|:-]+", line)
+        and re.search(r"-{3,}", line)
+    ]
+    if len(separator_rows) > 1:
         errors.append("more than one comparison table")
     if not re.search(r"(?im)^## What to verify before you buy\s*$", article):
         errors.append("missing consolidated buying checklist")
