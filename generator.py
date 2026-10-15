@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from openai import OpenAI
 
 from editor import quality_control
+from internal_links import add_internal_links
 
 ROOT = Path(__file__).parent
 TOPICS_FILE = ROOT / "topics.json"
@@ -181,6 +182,7 @@ def main():
         print(f"Running editorial QC: {topic['title']}")
         allowed_urls = {src["url"] for item in packet["products"].values() for src in item.get("sources", []) if not src.get("error")}
         final_article = quality_control(client, MODEL, topic, article, allowed_urls)
+        final_article = add_internal_links(final_article, topic)
         publish_path = PUBLISH_DIR / f"{topic['slug']}.md"
         publish_path.write_text(final_article + "\n", encoding="utf-8")
         print(f"Saved publish-ready article: {publish_path}")
